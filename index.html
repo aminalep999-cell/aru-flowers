@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Aru Flowers — Премиальные букеты</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:#17231f;font-family:Arial,Helvetica,sans-serif}
+a{text-decoration:none;color:inherit}.wrap{width:min(1120px,92%);margin:auto}
+
+/* Header — close to the supplied reference */
+.header{height:72px;border-bottom:1px solid #ecebea;background:#fff;position:sticky;top:0;z-index:30}
+.nav{height:100%;display:flex;align-items:center;gap:28px}
+.logo{display:flex;align-items:center;gap:8px;margin-right:auto}
+.logo img{width:45px;height:45px;border-radius:10px;object-fit:cover}
+.logo-text{font-family:Georgia,serif;font-size:22px;line-height:.82;color:#18332b}
+.logo-text small{display:block;font-family:Arial,sans-serif;font-size:7px;letter-spacing:2.5px;margin-top:5px}
+.links{display:flex;gap:24px;font-size:11px;color:#4e5552}
+.links a:hover{color:#bc4d6b}
+.header-actions{display:flex;gap:5px;align-items:center}
+.circle{border:0;background:#fff;font-size:17px;width:30px;height:30px;border-radius:50%;cursor:pointer}
+.login{border:0;background:#1769e0;color:#fff;font-size:12px;font-weight:700;padding:9px 15px;border-radius:8px;cursor:pointer;margin-left:6px}
+.login:hover{background:#0e58c8}.hamb{display:none}
+
+/* Hero */
+.hero{background:#f8f5f1}
+.hero-grid{display:grid;grid-template-columns:43% 57%;min-height:390px}
+.hero-copy{padding:58px 35px 50px 8px;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{font-size:9px;letter-spacing:2px;color:#bb5570;text-transform:uppercase;font-weight:700}
+h1{font-family:Georgia,serif;font-weight:500;color:#17352c;font-size:46px;line-height:.98;margin:14px 0 16px}
+.hero-copy p{font-size:14px;line-height:1.55;color:#6a716e;max-width:360px;margin:0}
+.cta{align-self:flex-start;margin-top:22px;background:#c65a76;color:#fff;border-radius:8px;padding:11px 18px;font-size:11px;font-weight:700}
+.cta:hover{background:#ae4864}
+.hero-photo{min-height:390px;background:
+linear-gradient(90deg,rgba(250,244,239,.1),rgba(255,255,255,0)),
+url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1200&q=85") center/cover}
+.hero-photo:after{content:"";display:block;height:100%;background:linear-gradient(90deg,rgba(248,245,241,.18),transparent 35%)}
+
+/* Product section */
+.products{padding:38px 0 46px}
+.section-title{font-family:Georgia,serif;font-size:25px;font-weight:500;margin:0 0 22px;color:#1b3028}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card{border:1px solid #e7e5e2;border-radius:8px;background:#fff;overflow:hidden;transition:.2s;position:relative}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(30,50,40,.08)}
+.pic{height:155px;background:#f3eee9 center/cover}
+.p1{background-image:url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=600&q=80")}
+.p2{background-image:url("https://images.unsplash.com/photo-1487070183336-b863922373d4?auto=format&fit=crop&w=600&q=80")}
+.p3{background-image:url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80")}
+.p4{background-image:url("https://images.unsplash.com/photo-1487530811015-7801c6e4c8e4?auto=format&fit=crop&w=600&q=80")}
+.info{padding:12px}.name{font-family:Georgia,serif;font-size:15px}.price{font-weight:700;font-size:12px;margin-top:7px}.cart{position:absolute;right:9px;bottom:9px;border:0;background:#f6f1ed;width:28px;height:28px;border-radius:50%;cursor:pointer}
+
+/* Footer strip */
+.strip{background:#0d2d24;color:#fff;padding:18px 0}
+.strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.strip-item{display:flex;gap:10px;align-items:center;font-size:10px}
+.strip-item strong{display:block;font-size:11px;margin-bottom:3px}.strip-item span{color:#bdccc6}
+
+/* Modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(7,24,19,.58);z-index:100;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}.modal{background:#fff;width:min(390px,100%);border-radius:18px;padding:27px;position:relative;box-shadow:0 25px 70px #0005}
+.close{position:absolute;right:12px;top:12px;border:0;background:#f2efec;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:19px}
+.modal-logo{display:block;width:55px;height:55px;object-fit:cover;border-radius:11px;margin:0 auto 7px}
+.modal h2{font-family:Georgia,serif;text-align:center;font-weight:500;color:#17352c;margin:0;font-size:27px}
+.modal p{text-align:center;color:#777;font-size:12px;margin:7px 0 20px}
+label{display:block;font-size:11px;font-weight:700;margin:12px 0 6px}
+input{width:100%;border:1px solid #ddd8d4;border-radius:8px;padding:12px;outline:none}
+input:focus{border-color:#1769e0;box-shadow:0 0 0 3px #1769e01a}
+.submit{width:100%;border:0;border-radius:8px;background:#1769e0;color:#fff;padding:12px;margin-top:17px;font-weight:700;cursor:pointer}
+.demo{font-size:10px!important;line-height:1.4;margin-top:12px!important;color:#888!important}
+
+
+/* New sections */
+.info-section{padding:62px 0;background:#fff}
+.info-section.alt{background:#f8f5f1}
+.info-head{text-align:center;max-width:650px;margin:0 auto 30px}
+.info-head .eyebrow{display:block;margin-bottom:8px}
+.info-head h2{font-family:Georgia,serif;color:#17352c;font-size:34px;font-weight:500;margin:0 0 10px}
+.info-head p{color:#747b78;font-size:13px;line-height:1.7;margin:0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.info-card{border:1px solid #e6e2df;border-radius:14px;padding:25px;background:#fff}
+.info-card h3{font-family:Georgia,serif;color:#17352c;font-size:20px;margin:0 0 8px}
+.info-card p{color:#727875;font-size:13px;line-height:1.7;margin:0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{background:#fff;border-radius:14px;padding:22px;border:1px solid #e8e4e0}
+.step-num{width:34px;height:34px;border-radius:50%;background:#c65a76;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;margin-bottom:14px}
+.step h3{font-family:Georgia,serif;margin:0 0 7px;color:#17352c;font-size:18px}
+.step p{font-size:12px;line-height:1.6;color:#777;margin:0}
+.assortment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.assort-card{border-radius:14px;overflow:hidden;background:#fff;border:1px solid #e6e2df}
+.assort-photo{height:190px;background-size:cover;background-position:center}
+.a1{background-image:url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80")}
+.a2{background-image:url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=800&q=80")}
+.a3{background-image:url("https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=800&q=80")}
+.assort-body{padding:18px}
+.assort-body h3{font-family:Georgia,serif;color:#17352c;margin:0 0 6px}
+.assort-body p{color:#777;font-size:12px;line-height:1.55;margin:0 0 9px}
+.assort-body strong{font-size:13px}
+.ai-box{background:#0d2d24;border-radius:20px;padding:30px;color:#fff}
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.ai-box h2{font-family:Georgia,serif;font-weight:500;font-size:34px;margin:0 0 10px}
+.ai-box .lead{color:#c5d2cd;font-size:13px;line-height:1.6}
+.ai-form{background:#fff;color:#17352c;border-radius:14px;padding:20px}
+.ai-form label{display:block;font-size:11px;font-weight:700;margin:10px 0 6px}
+.ai-form select{width:100%;padding:11px;border:1px solid #ddd8d4;border-radius:8px;background:#fff}
+.ai-button{width:100%;margin-top:15px;border:0;background:#c65a76;color:#fff;padding:12px;border-radius:8px;font-weight:700;cursor:pointer}
+.ai-results{display:none;margin-top:20px}
+.ai-results.show{display:block}
+.ai-results h3{font-family:Georgia,serif;font-size:22px;font-weight:500;margin:0 0 13px}
+.ai-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ai-option{background:#fff;color:#17352c;border-radius:11px;padding:15px}
+.ai-option .flower{font-size:30px}.ai-option h4{font-family:Georgia,serif;margin:8px 0 5px;font-size:16px}
+.ai-option p{font-size:11px;color:#777;line-height:1.5;margin:0 0 8px}
+.ai-option strong{font-size:12px}
+@media(max-width:850px){
+ .about-grid,.ai-grid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}
+ .assortment-grid{grid-template-columns:1fr 1fr}.ai-options{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+ .steps,.assortment-grid,.ai-options{grid-template-columns:1fr}.info-section{padding:48px 0}.ai-box{padding:20px}.ai-box h2{font-size:28px}
+}
+
+/* Responsive */
+@media(max-width:850px){
+ .links{display:none}.hamb{display:block}.grid{grid-template-columns:repeat(2,1fr)}
+ .hero-grid{grid-template-columns:1fr}.hero-copy{padding:45px 0}.hero-photo{min-height:270px}
+}
+@media(max-width:560px){
+ .header{height:62px}.logo img{width:39px;height:39px}.logo-text{font-size:19px}
+ .header-actions .circle{display:none}.login{font-size:11px;padding:8px 12px}
+ h1{font-size:39px}.hero-photo{min-height:220px}.grid{grid-template-columns:1fr 1fr;gap:9px}.pic{height:130px}
+ .strip-grid{grid-template-columns:1fr}.strip-item{justify-content:center}
+}
+
+.install-app{border:1px solid #0d2d24;background:#fff;color:#0d2d24;font-size:11px;font-weight:700;padding:8px 12px;border-radius:8px;cursor:pointer}
+.install-app:hover{background:#f3f7f5}
+@media(max-width:560px){.install-app{font-size:10px;padding:7px 9px}}
+</style>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0d2d24">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Aru Flowers">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+
+<header class="header">
+ <div class="wrap nav">
+  <a class="logo" href="#">
+   <img src="aru-flowers-logo.png" alt="Aru Flowers">
+   <div class="logo-text">Aru<small>FLOWERS</small></div>
+  </a>
+  <nav class="links">
+   <a href="#home">Главная</a><a href="#bouquets">Букеты</a><a href="#assortment">Ассортимент</a><a href="#about">О нас</a><a href="#delivery">Доставка</a><a href="#ai">AI-подбор</a><a href="#contacts">Контакты</a>
+  </nav>
+  <div class="header-actions">
+   <button class="circle" onclick="msg('Поиск')">⌕</button>
+   <button class="circle" onclick="msg('Избранное')">♡</button>
+   <button class="circle" onclick="msg('Корзина пуста')">🛒</button>
+   <button class="install-app" id="installApp" onclick="installPWA()" style="display:none">Установить</button><button class="login" onclick="openLogin()">Войти</button>
+   <button class="circle hamb">☰</button>
+  </div>
+ </div>
+</header>
+
+<section class="hero" id="home">
+ <div class="wrap hero-grid">
+  <div class="hero-copy">
+   <div class="eyebrow">Aru Flowers</div>
+   <h1>Свежие цветы<br>для особенных<br>моментов</h1>
+   <p>Букеты, которые говорят больше, чем слова. Премиальные композиции для тех, кто ценит красоту.</p>
+   <a class="cta" href="#bouquets">Выбрать букет&nbsp; →</a>
+  </div>
+  <div class="hero-photo"></div>
+ </div>
+</section>
+
+<section class="products" id="bouquets">
+ <div class="wrap">
+  <h2 class="section-title">Популярные букеты</h2>
+  <div class="grid">
+   <article class="card"><div class="pic p1"></div><div class="info"><div class="name">Классический</div><div class="price">12 990 ₸</div></div><button class="cart" onclick="msg('Классический добавлен в корзину')">🛒</button></article>
+   <article class="card"><div class="pic p2"></div><div class="info"><div class="name">Нежность</div><div class="price">14 990 ₸</div></div><button class="cart" onclick="msg('Нежность добавлена в корзину')">🛒</button></article>
+   <article class="card"><div class="pic p3"></div><div class="info"><div class="name">Страсть</div><div class="price">16 990 ₸</div></div><button class="cart" onclick="msg('Страсть добавлена в корзину')">🛒</button></article>
+   <article class="card"><div class="pic p4"></div><div class="info"><div class="name">Весенний</div><div class="price">13 990 ₸</div></div><button class="cart" onclick="msg('Весенний добавлен в корзину')">🛒</button></article>
+  </div>
+ </div>
+</section>
+
+<section class="info-section" id="about">
+  <div class="wrap">
+    <div class="info-head">
+      <span class="eyebrow">О нас</span>
+      <h2>Цветы, которые говорят за вас</h2>
+      <p>Aru Flowers — магазин премиальных букетов. Мы собираем композиции вручную и уделяем внимание каждой детали.</p>
+    </div>
+    <div class="about-grid">
+      <div class="info-card">
+        <h3>Наша философия</h3>
+        <p>Минимализм, свежесть и аккуратная упаковка. Мы хотим, чтобы букет выглядел красиво сразу после доставки и радовал как можно дольше.</p>
+      </div>
+      <div class="info-card">
+        <h3>Для любого события</h3>
+        <p>День рождения, свидание, праздник, благодарность или просто желание порадовать близкого человека — подберём подходящую композицию.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="info-section alt" id="delivery">
+  <div class="wrap">
+    <div class="info-head">
+      <span class="eyebrow">Доставка</span>
+      <h2>Как проходит заказ</h2>
+      <p>Простой процесс от выбора букета до его получения.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Выберите</h3><p>Откройте ассортимент и выберите понравившийся букет.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Оформите</h3><p>Укажите контакты, адрес и удобное время доставки.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Мы соберём</h3><p>Флорист соберёт композицию из свежих цветов вручную.</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Получите</h3><p>Курьер бережно доставит букет в выбранное время.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="info-section" id="assortment">
+  <div class="wrap">
+    <div class="info-head">
+      <span class="eyebrow">Ассортимент</span>
+      <h2>Коллекции Aru Flowers</h2>
+      <p>Три направления, чтобы быстрее найти подходящий букет.</p>
+    </div>
+    <div class="assortment-grid">
+      <article class="assort-card"><div class="assort-photo a1"></div><div class="assort-body"><h3>Классика</h3><p>Розы и элегантные композиции для важных событий.</p><strong>от 12 990 ₸</strong></div></article>
+      <article class="assort-card"><div class="assort-photo a2"></div><div class="assort-body"><h3>Нежность</h3><p>Светлые оттенки, тюльпаны и воздушные сезонные цветы.</p><strong>от 13 990 ₸</strong></div></article>
+      <article class="assort-card"><div class="assort-photo a3"></div><div class="assort-body"><h3>Премиум</h3><p>Большие авторские букеты для действительно особенного момента.</p><strong>от 24 990 ₸</strong></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="info-section alt" id="ai">
+  <div class="wrap">
+    <div class="ai-box">
+      <div class="ai-grid">
+        <div>
+          <span class="eyebrow" style="color:#e8a4b5">AI-подбор</span>
+          <h2>Не знаете, какой букет выбрать?</h2>
+          <p class="lead">Ответьте на два вопроса — Aru AI предложит три подходящих варианта из коллекции.</p>
+          <p class="lead">Это демонстрационный AI-подбор внутри сайта: без регистрации и без отправки личных данных.</p>
+        </div>
+        <div class="ai-form">
+          <label for="occasion">Для какого события?</label>
+          <select id="occasion">
+            <option value="date">Свидание</option>
+            <option value="birthday">День рождения</option>
+            <option value="celebration">Праздник</option>
+            <option value="thanks">Благодарность</option>
+          </select>
+          <label for="budget">Бюджет</label>
+          <select id="budget">
+            <option value="low">до 15 000 ₸</option>
+            <option value="mid">15 000–25 000 ₸</option>
+            <option value="premium">от 25 000 ₸</option>
+          </select>
+          <button class="ai-button" onclick="recommend()">Подобрать 3 букета</button>
+        </div>
+      </div>
+      <div class="ai-results" id="aiResults">
+        <h3>Рекомендации для вас</h3>
+        <div class="ai-options" id="aiOptions"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+ <div class="wrap strip-grid">
+  <div class="strip-item">🚚 <div><strong>Быстрая доставка</strong><span>По всему городу</span></div></div>
+  <div class="strip-item">✦ <div><strong>Гарантия свежести</strong><span>Только свежие цветы</span></div></div>
+  <div class="strip-item">♡ <div><strong>Забота о каждом</strong><span>Внимание к деталям</span></div></div>
+ </div>
+</div>
+
+<footer id="contacts" style="padding:30px 0;text-align:center;color:#777;font-size:11px">
+ <div class="wrap">© 2026 Aru Flowers · +7 (700) 000-00-00 · info@aru-flowers.kz</div>
+</footer>
+
+<div class="overlay" id="loginOverlay" onclick="outside(event)">
+ <div class="modal">
+  <button class="close" onclick="closeLogin()">×</button>
+  <img class="modal-logo" src="aru-flowers-logo.png" alt="Aru Flowers">
+  <h2>Войти</h2><p>Войдите в свой аккаунт Aru Flowers</p>
+  <form onsubmit="login(event)">
+   <label>Email</label><input type="email" placeholder="Ваш email" required>
+   <label>Пароль</label><input type="password" placeholder="Ваш пароль" minlength="6" required>
+   <button class="submit">Войти</button>
+   <p class="demo">Демонстрационная форма. Данные не сохраняются и не отправляются.</p>
+  </form>
+ </div>
+</div>
+
+<div id="toast" style="position:fixed;right:18px;bottom:18px;background:#0d2d24;color:#fff;padding:11px 15px;border-radius:9px;font-size:11px;transform:translateY(100px);transition:.25s;z-index:200"></div>
+
+<script>
+const overlay=document.getElementById('loginOverlay');
+function openLogin(){overlay.classList.add('show')}
+function closeLogin(){overlay.classList.remove('show')}
+function outside(e){if(e.target===overlay)closeLogin()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLogin()})
+function login(e){e.preventDefault();msg('Демонстрационный вход выполнен');setTimeout(closeLogin,900)}
+
+function recommend(){
+ const occasion=document.getElementById('occasion').value;
+ const budget=document.getElementById('budget').value;
+ const sets={
+  date:[
+   ['🌷','Нежность','Тюльпаны и нежные оттенки — спокойный романтичный выбор.','14 990 ₸'],
+   ['🌸','Весенний','Лёгкая композиция для тёплого свидания.','13 990 ₸'],
+   ['🌹','Классический','Розы в элегантной упаковке для особенного вечера.','16 990 ₸']
+  ],
+  birthday:[
+   ['💐','Премиум','Яркая авторская композиция, которая запомнится.','24 990 ₸'],
+   ['🌹','Классический','Универсальный букет для поздравления.','12 990 ₸'],
+   ['🌸','Весенний','Свежая композиция с мягкими цветами.','13 990 ₸']
+  ],
+  celebration:[
+   ['💐','Премиум','Большой эффектный букет для праздника.','24 990 ₸'],
+   ['🌹','Страсть','Насыщенные оттенки и выразительная композиция.','16 990 ₸'],
+   ['🌷','Нежность','Более спокойный вариант для деликатного подарка.','14 990 ₸']
+  ],
+  thanks:[
+   ['🌷','Нежность','Тёплый и аккуратный букет со светлым настроением.','14 990 ₸'],
+   ['🌸','Весенний','Лёгкая композиция в нежной палитре.','13 990 ₸'],
+   ['💐','Премиум','Если хочется выразить особую благодарность.','24 990 ₸']
+  ]
+ };
+ let options=sets[occasion];
+ if(budget==='low') options=options.filter(x=>!x[1].includes('Премиум')).slice(0,3);
+ if(budget==='premium') options=options.sort((a,b)=>parseInt(b[3].replace(/\D/g,''))-parseInt(a[3].replace(/\D/g,'')));
+ if(options.length<3) options=sets[occasion];
+ const box=document.getElementById('aiOptions');
+ box.innerHTML=options.slice(0,3).map(x=>`<article class="ai-option"><div class="flower">${x[0]}</div><h4>${x[1]}</h4><p>${x[2]}</p><strong>${x[3]}</strong></article>`).join('');
+ document.getElementById('aiResults').classList.add('show');
+}
+function msg(t){const x=document.getElementById('toast');x.textContent=t;x.style.transform='translateY(0)';clearTimeout(window.tm);window.tm=setTimeout(()=>x.style.transform='translateY(100px)',1800)}
+
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  const btn = document.getElementById('installApp');
+  if (btn) btn.style.display = 'inline-block';
+});
+
+async function installPWA(){
+  if (!deferredInstallPrompt) {
+    msg('Откройте меню Chrome → Установить приложение');
+    return;
+  }
+  deferredInstallPrompt.prompt();
+  const choice = await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  const btn = document.getElementById('installApp');
+  if (btn) btn.style.display = 'none';
+  if (choice && choice.outcome === 'accepted') msg('Aru Flowers установлено на устройство');
+}
+
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('installApp');
+  if (btn) btn.style.display = 'none';
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW error:', err));
+  });
+}
+</script>
+</body>
+</html>
